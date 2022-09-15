@@ -7,18 +7,18 @@ import org.apache.coyote.header.HttpHeader;
 import org.apache.coyote.header.HttpHeaders;
 import org.apache.coyote.request.HttpRequest;
 
-public class AuthorizeService {
+public class SessionAuthorizeService {
 
     private static final String JSESSIONID = "JSESSIONID";
 
-    private AuthorizeService() {
+    private SessionAuthorizeService() {
     }
 
     private static class AuthorizeServiceGenerator{
-        private static final AuthorizeService INSTANCE = new AuthorizeService();
+        private static final SessionAuthorizeService INSTANCE = new SessionAuthorizeService();
     }
 
-    public static AuthorizeService getInstance() {
+    public static SessionAuthorizeService getInstance() {
         return AuthorizeServiceGenerator.INSTANCE;
     }
 

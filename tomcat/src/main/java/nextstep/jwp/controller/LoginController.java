@@ -6,7 +6,7 @@ import static nextstep.jwp.controller.ResourceUrls.UNAUTHORIZED_HTML;
 
 import java.util.Map;
 import java.util.NoSuchElementException;
-import nextstep.jwp.application.AuthorizeService;
+import nextstep.jwp.application.SessionAuthorizeService;
 import nextstep.jwp.application.UserService;
 import nextstep.jwp.dto.UserLoginRequest;
 import org.apache.catalina.session.SessionManager;
@@ -17,12 +17,12 @@ import org.apache.coyote.response.HttpResponse;
 
 public class LoginController extends ResourceController {
 
-    private final AuthorizeService authorizeService = AuthorizeService.getInstance();
+    private final SessionAuthorizeService sessionAuthorizeService = SessionAuthorizeService.getInstance();
     private final UserService userService = UserService.getInstance();
 
     @Override
     public void doGet(final HttpRequest httpRequest, final HttpResponse httpResponse) {
-        if (authorizeService.isAuthorized(httpRequest)) {
+        if (sessionAuthorizeService.isAuthorized(httpRequest)) {
             setRedirectHeader(httpResponse, INDEX_HTML);
             return;
         }
