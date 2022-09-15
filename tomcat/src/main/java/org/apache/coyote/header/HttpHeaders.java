@@ -1,4 +1,4 @@
-package org.apache.coyote.http11.http;
+package org.apache.coyote.header;
 
 import static org.apache.catalina.webutils.Parser.removeBlank;
 
@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import org.apache.coyote.http11.header.HttpHeader;
-import org.apache.coyote.http11.header.HttpHeaderType;
 
 public class HttpHeaders {
     private Map<String, HttpHeader> headers = new LinkedHashMap<>();

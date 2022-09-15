@@ -1,26 +1,25 @@
 package nextstep.jwp.controller;
 
-import static org.apache.coyote.http11.header.ContentType.UTF_8;
-import static org.apache.coyote.http11.header.HttpHeaderType.CONTENT_TYPE;
-import static org.apache.coyote.http11.header.HttpHeaderType.LOCATION;
-import static org.apache.coyote.http11.http.response.HttpStatus.OK;
-import static org.apache.coyote.http11.http.response.HttpStatus.REDIRECT;
+import static org.apache.coyote.header.HttpHeaderType.CONTENT_TYPE;
+import static org.apache.coyote.header.HttpHeaderType.LOCATION;
+import static org.apache.coyote.response.HttpStatus.OK;
+import static org.apache.coyote.response.HttpStatus.REDIRECT;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import nextstep.jwp.exception.InternalException;
 import org.apache.catalina.webutils.IOUtils;
 import org.apache.catalina.webutils.Parser;
-import org.apache.coyote.http11.header.ContentType;
-import org.apache.coyote.http11.header.HttpHeader;
-import org.apache.coyote.http11.http.request.HttpRequest;
-import org.apache.coyote.http11.http.response.HttpResponse;
+import org.apache.coyote.header.ContentType;
+import org.apache.coyote.http11.controller.AbstractController;
+import org.apache.coyote.request.HttpRequest;
+import org.apache.coyote.response.HttpResponse;
 
 public class ResourceController extends AbstractController {
 
     @Override
-    protected void doGet(final HttpRequest httpRequest,
-                         final HttpResponse httpResponse) {
+    public void doGet(final HttpRequest httpRequest,
+                      final HttpResponse httpResponse) {
         setResource(httpRequest, httpResponse);
     }
 
@@ -41,9 +40,9 @@ public class ResourceController extends AbstractController {
         final String fileType = Parser.parseFileType(fileName);
         try {
             final String body = IOUtils.readResourceFile(fileName);
-            final HttpHeader contentType = HttpHeader.of(CONTENT_TYPE.getValue(), ContentType.of(fileType), UTF_8.getValue());
             httpResponse.setHttpStatus(OK);
-            httpResponse.addHeader(contentType);
+            httpResponse.addHeader(CONTENT_TYPE.getValue(), ContentType.of(fileType) + ";charset=utf-8");
+//            httpResponse.setCharacterEncoding("utf-8");
             httpResponse.setBody(body);
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
@@ -52,8 +51,7 @@ public class ResourceController extends AbstractController {
     }
 
     protected void setRedirectHeader(final HttpResponse httpResponse, final ResourceUrls resourceUrls) {
-        final HttpHeader location = HttpHeader.of(LOCATION.getValue(), resourceUrls.getValue());
         httpResponse.setHttpStatus(REDIRECT);
-        httpResponse.addHeader(location);
+        httpResponse.addHeader(LOCATION.getValue(), resourceUrls.getValue());
     }
 }

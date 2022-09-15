@@ -11,10 +11,9 @@ import nextstep.jwp.application.UserService;
 import nextstep.jwp.dto.UserLoginRequest;
 import org.apache.catalina.session.SessionManager;
 import org.apache.catalina.webutils.Parser;
-import org.apache.coyote.http11.header.HttpCookie;
-import org.apache.coyote.http11.header.HttpHeader;
-import org.apache.coyote.http11.http.request.HttpRequest;
-import org.apache.coyote.http11.http.response.HttpResponse;
+import org.apache.coyote.header.HttpCookie;
+import org.apache.coyote.request.HttpRequest;
+import org.apache.coyote.response.HttpResponse;
 
 public class LoginController extends ResourceController {
 
@@ -22,7 +21,7 @@ public class LoginController extends ResourceController {
     private final UserService userService = UserService.getInstance();
 
     @Override
-    protected void doGet(final HttpRequest httpRequest, final HttpResponse httpResponse) {
+    public void doGet(final HttpRequest httpRequest, final HttpResponse httpResponse) {
         if (authorizeService.isAuthorized(httpRequest)) {
             setRedirectHeader(httpResponse, INDEX_HTML);
             return;
@@ -31,7 +30,7 @@ public class LoginController extends ResourceController {
     }
 
     @Override
-    protected void doPost(final HttpRequest httpRequest, final HttpResponse httpResponse) {
+    public void doPost(final HttpRequest httpRequest, final HttpResponse httpResponse) {
         final String body = httpRequest.getBody();
         login(body, httpResponse);
     }
@@ -42,9 +41,8 @@ public class LoginController extends ResourceController {
             final UserLoginRequest userLoginRequest = getUserLoginRequest(queryParams);
             userService.login(userLoginRequest);
             final HttpCookie cookie = SessionManager.createCookie();
-            final HttpHeader cookieHeader = HttpHeader.of("Set-Cookie", cookie.toHeaderValue());
             setRedirectHeader(httpResponse, INDEX_HTML);
-            httpResponse.addHeader(cookieHeader);
+            httpResponse.addHeader("Set-Cookie", cookie.toHeaderValue());
         } catch (IllegalArgumentException exception) {
             setRedirectHeader(httpResponse, UNAUTHORIZED_HTML);
         } catch (NoSuchElementException exception) {

@@ -1,4 +1,4 @@
-package org.apache.coyote.http11.http.request;
+package org.apache.coyote.request;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;

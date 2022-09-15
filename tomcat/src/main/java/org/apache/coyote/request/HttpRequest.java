@@ -1,12 +1,12 @@
-package org.apache.coyote.http11.http.request;
+package org.apache.coyote.request;
 
 import static org.apache.catalina.webutils.IOUtils.readData;
-import static org.apache.coyote.http11.header.HttpHeaderType.CONTENT_LENGTH;
+import static org.apache.coyote.header.HttpHeaderType.CONTENT_LENGTH;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import org.apache.coyote.http11.header.HttpHeader;
-import org.apache.coyote.http11.http.HttpHeaders;
+import org.apache.coyote.header.HttpHeader;
+import org.apache.coyote.header.HttpHeaders;
 
 public class HttpRequest {
 

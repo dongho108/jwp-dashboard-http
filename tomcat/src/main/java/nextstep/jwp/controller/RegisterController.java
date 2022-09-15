@@ -7,22 +7,22 @@ import java.util.Map;
 import nextstep.jwp.application.UserService;
 import nextstep.jwp.dto.UserRegisterRequest;
 import org.apache.catalina.webutils.Parser;
-import org.apache.coyote.http11.http.request.HttpRequest;
-import org.apache.coyote.http11.http.response.HttpResponse;
+import org.apache.coyote.request.HttpRequest;
+import org.apache.coyote.response.HttpResponse;
 
 public class RegisterController extends ResourceController {
 
     private final UserService userService = UserService.getInstance();
 
     @Override
-    protected void doGet(final HttpRequest httpRequest,
-                         final HttpResponse httpResponse) {
+    public void doGet(final HttpRequest httpRequest,
+                      final HttpResponse httpResponse) {
         setResource(REGISTER_HTML.getValue(), httpResponse);
     }
 
     @Override
-    protected void doPost(final HttpRequest httpRequest,
-                          final HttpResponse httpResponse) {
+    public void doPost(final HttpRequest httpRequest,
+                       final HttpResponse httpResponse) {
         final String body = httpRequest.getBody();
 
         final Map<String, String> queryParams = Parser.parseQueryParams(body);

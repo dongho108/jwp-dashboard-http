@@ -3,7 +3,7 @@ package org.apache.catalina.session;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import org.apache.coyote.http11.header.HttpCookie;
+import org.apache.coyote.header.HttpCookie;
 
 public class SessionManager {
 

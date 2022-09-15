@@ -1,4 +1,4 @@
-package org.apache.coyote.http11.header;
+package org.apache.coyote.header;
 
 import java.util.List;
 
@@ -23,5 +23,9 @@ public class HttpHeader {
 
     public List<String> getValues() {
         return values;
+    }
+
+    public void addValue(final String value) {
+        values.add(value);
     }
 }

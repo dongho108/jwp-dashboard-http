@@ -1,22 +1,18 @@
 package nextstep.jwp.controller;
 
-import static org.apache.coyote.http11.header.ContentType.HTML;
-import static org.apache.coyote.http11.header.ContentType.UTF_8;
-import static org.apache.coyote.http11.header.HttpHeaderType.CONTENT_TYPE;
-import static org.apache.coyote.http11.http.response.HttpStatus.OK;
+import static org.apache.coyote.response.HttpStatus.OK;
 
-import org.apache.coyote.http11.header.HttpHeader;
-import org.apache.coyote.http11.http.request.HttpRequest;
-import org.apache.coyote.http11.http.response.HttpResponse;
+import org.apache.coyote.http11.controller.AbstractController;
+import org.apache.coyote.request.HttpRequest;
+import org.apache.coyote.response.HttpResponse;
 
 public class HomeController extends AbstractController {
     private static final String DEFAULT_MESSAGE = "Hello world!";
 
     @Override
-    protected void doGet(final HttpRequest httpRequest, final HttpResponse httpResponse) {
-        final HttpHeader contentType = HttpHeader.of(CONTENT_TYPE.getValue(), HTML.getValue(), UTF_8.getValue());
+    public void doGet(final HttpRequest httpRequest, final HttpResponse httpResponse) {
         httpResponse.setHttpStatus(OK);
-        httpResponse.addHeader(contentType);
+        httpResponse.addHeader("Content-Type", "text/html;charset=utf-8");
         httpResponse.setBody(DEFAULT_MESSAGE);
     }
 }

@@ -1,7 +1,7 @@
-package org.apache.coyote.http11.http.request;
+package org.apache.coyote.request;
 
 import java.util.List;
-import org.apache.coyote.http11.http.HttpVersion;
+import org.apache.coyote.HttpVersion;
 
 public class HttpRequestStartLine {
 

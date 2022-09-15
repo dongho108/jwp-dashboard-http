@@ -1,14 +1,14 @@
-package org.apache.coyote.http11.http.response;
+package org.apache.coyote.response;
 
-import static org.apache.coyote.http11.header.HttpHeaderType.CONTENT_LENGTH;
-import static org.apache.coyote.http11.http.response.HttpStatus.*;
+import static org.apache.coyote.header.HttpHeaderType.CONTENT_LENGTH;
+import static org.apache.coyote.response.HttpStatus.OK;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.coyote.http11.header.HttpHeader;
-import org.apache.coyote.http11.http.HttpHeaders;
-import org.apache.coyote.http11.http.HttpVersion;
+import org.apache.coyote.HttpVersion;
+import org.apache.coyote.header.HttpHeader;
+import org.apache.coyote.header.HttpHeaders;
 
 public class HttpResponse {
 
@@ -32,14 +32,13 @@ public class HttpResponse {
         this.httpStatus = httpStatus;
     }
 
-    public void addHeader(final HttpHeader httpHeader) {
-        headers.add(httpHeader);
+    public void addHeader(final String name, final String value) {
+        headers.add(HttpHeader.of(name, value));
     }
 
     public void setBody(final String body) {
         final int length = body.getBytes(StandardCharsets.UTF_8).length;
-        final HttpHeader contentLength = HttpHeader.of(CONTENT_LENGTH.getValue(), String.valueOf(length));
-        addHeader(contentLength);
+        addHeader(CONTENT_LENGTH.getValue(), String.valueOf(length));
         this.body = body;
     }
 

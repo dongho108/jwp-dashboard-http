@@ -1,11 +1,11 @@
 package nextstep.jwp.application;
 
-import static org.apache.coyote.http11.header.HttpHeaderType.COOKIE;
+import static org.apache.coyote.header.HttpHeaderType.COOKIE;
 
 import java.util.Optional;
-import org.apache.coyote.http11.header.HttpHeader;
-import org.apache.coyote.http11.http.HttpHeaders;
-import org.apache.coyote.http11.http.request.HttpRequest;
+import org.apache.coyote.header.HttpHeader;
+import org.apache.coyote.header.HttpHeaders;
+import org.apache.coyote.request.HttpRequest;
 
 public class AuthorizeService {
 

@@ -1,15 +1,15 @@
-package org.apache.coyote.http11.http;
+package org.apache.coyote;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.regex.Pattern;
-import nextstep.jwp.controller.Controller;
 import nextstep.jwp.controller.HomeController;
-import nextstep.jwp.controller.LoginController;
 import nextstep.jwp.controller.IndexController;
+import nextstep.jwp.controller.LoginController;
 import nextstep.jwp.controller.RegisterController;
 import nextstep.jwp.controller.ResourceController;
-import org.apache.coyote.http11.http.request.HttpRequest;
+import org.apache.coyote.http11.controller.Controller;
+import org.apache.coyote.request.HttpRequest;
 
 public enum RequestMapper {
 
