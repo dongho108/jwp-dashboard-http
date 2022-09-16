@@ -1,4 +1,4 @@
-package org.apache.coyote;
+package org.apache.catalina;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
